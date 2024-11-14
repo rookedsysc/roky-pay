@@ -1,11 +1,11 @@
-package org.rookedsysc.rokypay
+package org.rookedsysc.membershipservice
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
-class RokyPayApplication
+class MembershipServiceApplication
 
 fun main(args: Array<String>) {
-    runApplication<RokyPayApplication>(*args)
+    runApplication<MembershipServiceApplication>(*args)
 }

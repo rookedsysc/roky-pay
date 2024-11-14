@@ -1,10 +1,10 @@
-package org.rookedsysc.rokypay
+package org.rookedsysc.membershipservice
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
-class RokyPayApplicationTests {
+class MembershipServiceApplicationTests {
 
     @Test
     fun contextLoads() {
