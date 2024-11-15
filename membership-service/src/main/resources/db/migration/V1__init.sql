@@ -1,0 +1,8 @@
+CREATE TABLE membership (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    address VARCHAR(255) NOT NULL,
+    is_valid BOOLEAN NOT NULL,
+    is_corp BOOLEAN NOT NULL
+);
