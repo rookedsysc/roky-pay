@@ -1,7 +1,7 @@
 package org.rookedsysc.membershipservice.domain
 
 class MemberShip(
-    private val id: Long,
+    private val id: String,
     private val name: String,
     private val email: String,
     private val address: String,
