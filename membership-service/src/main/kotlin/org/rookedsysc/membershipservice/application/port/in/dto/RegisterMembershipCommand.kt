@@ -13,13 +13,17 @@ import org.rookedsysc.membershipservice.common.LogConfig
 data class RegisterMembershipCommand(
     @field:NotBlank
     val name: String,
+
     @field:NotBlank
     @field:Email
     val email: String,
+
     @field:NotBlank
     val address: String,
+
     @field:AssertTrue
     val isValid: Boolean,
+
     @field:NotNull
     val isCorp: Boolean
 ) {
@@ -29,9 +33,7 @@ data class RegisterMembershipCommand(
         val validator: Validator = factory.validator
         val violations = validator.validate(this)
         if (violations.isNotEmpty()) {
-            for(violation in violations) {
-                log.error("RegisterMembershipCommand validation error: ${violation.message}")
-            }
+            log.error("RegisterMembershipCommand validation failed: ${violations.joinToString("\n")}")
             throw ConstraintViolationException(violations)
         }
     }
