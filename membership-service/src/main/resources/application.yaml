@@ -3,7 +3,7 @@ spring:
     properties:
       dialect: org.hibernate.dialect.MySQL8Dialect
     hibernate:
-      ddl-auto:
+      ddl-auto: validate
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
   datasource:
