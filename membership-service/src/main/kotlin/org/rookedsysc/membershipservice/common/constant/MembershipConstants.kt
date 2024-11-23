@@ -1,7 +1,7 @@
 package org.rookedsysc.membershipservice.common.constant
 
-class MembershipConstatns {
+class MembershipConstants {
     companion object {
-        const val MEMBERSHIP_REGISTER = "/membership"
+        const val MEMBERSHIP = "/membership"
     }
 }
