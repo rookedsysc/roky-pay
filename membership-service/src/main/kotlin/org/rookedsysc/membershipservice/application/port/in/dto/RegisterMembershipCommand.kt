@@ -1,14 +1,10 @@
 package org.rookedsysc.membershipservice.application.port.`in`.dto
 
-import jakarta.validation.ConstraintViolationException
-import jakarta.validation.Validation
-import jakarta.validation.Validator
-import jakarta.validation.ValidatorFactory
 import jakarta.validation.constraints.AssertTrue
 import jakarta.validation.constraints.Email
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.NotNull
-import org.rookedsysc.membershipservice.common.LogConfig
+import org.rookedsysc.membershipservice.common.ValidationUtils
 
 data class RegisterMembershipCommand(
     @field:NotBlank
@@ -27,14 +23,7 @@ data class RegisterMembershipCommand(
     @field:NotNull
     val isCorp: Boolean
 ) {
-    companion object : LogConfig
     init {
-        val factory: ValidatorFactory = Validation.buildDefaultValidatorFactory()
-        val validator: Validator = factory.validator
-        val violations = validator.validate(this)
-        if (violations.isNotEmpty()) {
-            log.error("RegisterMembershipCommand validation failed: ${violations.joinToString("\n")}")
-            throw ConstraintViolationException(violations)
-        }
+        ValidationUtils.validate(this)
     }
 }
