@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
 import org.rookedsysc.membershipservice.aop.MembershipTag
 import org.rookedsysc.membershipservice.application.port.`in`.usecase.FindMembershipUsecase
+import org.rookedsysc.membershipservice.common.constant.MembershipConstants
 import org.rookedsysc.membershipservice.domain.MemberShip
 import org.springframework.http.ResponseEntity
 import org.springframework.web.ErrorResponse
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @MembershipTag
-@RequestMapping
+@RequestMapping(MembershipConstants.MEMBERSHIP)
 class FindMembershipController(
     private val findMembershipUsecase: FindMembershipUsecase
 ) {
@@ -42,7 +43,7 @@ class FindMembershipController(
             )
         ]
     )
-    @GetMapping("/membership/{membershipId}")
+    @GetMapping("/{membershipId}")
     fun getMembership(@PathVariable membershipId: Long): ResponseEntity<MemberShip> {
         val response: MemberShip = findMembershipUsecase.getMembership(membershipId)
         return ResponseEntity.ok(response)

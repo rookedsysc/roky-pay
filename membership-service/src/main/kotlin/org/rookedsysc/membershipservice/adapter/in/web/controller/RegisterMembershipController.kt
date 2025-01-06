@@ -5,13 +5,12 @@ import io.swagger.v3.oas.annotations.media.Content
 import io.swagger.v3.oas.annotations.media.Schema
 import io.swagger.v3.oas.annotations.responses.ApiResponse
 import io.swagger.v3.oas.annotations.responses.ApiResponses
-import io.swagger.v3.oas.annotations.tags.Tag
 import jakarta.validation.Valid
 import org.rookedsysc.membershipservice.adapter.`in`.web.dto.RegisterMembershipRequest
 import org.rookedsysc.membershipservice.aop.MembershipTag
 import org.rookedsysc.membershipservice.application.port.`in`.dto.RegisterMembershipCommand
 import org.rookedsysc.membershipservice.application.port.`in`.usecase.RegisterMembershipUsecase
-import org.rookedsysc.membershipservice.common.constant.MembershipConstatns
+import org.rookedsysc.membershipservice.common.constant.MembershipConstants
 import org.rookedsysc.membershipservice.domain.MemberShip
 import org.springframework.web.ErrorResponse
 import org.springframework.web.bind.annotation.PostMapping
@@ -21,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @MembershipTag
-@RequestMapping(MembershipConstatns.MEMBERSHIP_REGISTER)
+@RequestMapping(MembershipConstants.MEMBERSHIP)
 class RegisterMembershipController(
     val registerMembershipUsecase: RegisterMembershipUsecase
 ) {
