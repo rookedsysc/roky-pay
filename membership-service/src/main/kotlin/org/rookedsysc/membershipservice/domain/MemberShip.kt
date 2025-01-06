@@ -27,4 +27,19 @@ class MemberShip(
 
     @field:NotNull
     val isCorp: Boolean
-) {}
+) {
+    init {
+        ValidationUtils.validate(this)
+    }
+
+    fun modify(modifyMembershipCommand: ModifyMembershipCommand): MemberShip {
+        return MemberShip(
+            id = modifyMembershipCommand.id.toString(),
+            name = modifyMembershipCommand.name ?: this.name,
+            email = modifyMembershipCommand.email ?: this.email,
+            address = modifyMembershipCommand.address ?: this.address,
+            isValid = this.isValid,
+            isCorp = modifyMembershipCommand.isCorp ?: this.isCorp
+        )
+    }
+}
