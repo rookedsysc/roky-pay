@@ -1,0 +1,13 @@
+services:
+  roky-pay:
+    networks:
+      - roky-pay
+    image: mysql:8.4.3
+    environment:
+      MYSQL_ROOT_PASSWORD: df159357
+      MYSQL_DATABASE: roky_pay
+    ports:
+      - "3306:3306"
+networks:
+  roky-pay:
+    driver: bridge
