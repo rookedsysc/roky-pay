@@ -1,9 +1,5 @@
 plugins {
-    kotlin("jvm")
-    kotlin("plugin.spring")
-    id("org.springframework.boot")
-    id("io.spring.dependency-management")
-    kotlin("plugin.jpa")
+    id("com.palantir.docker") version "0.36.0"
 }
 
 dependencies {
@@ -18,3 +14,15 @@ dependencies {
 }
 
 tasks.register("prepareKotlinBuildScriptModel") {}
+
+docker {
+    println(tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar").get().outputs.files)
+    name = "${rootProject.name}-${project.name}:${project.version}"
+    setDockerfile(File("./Dockerfile"))
+    files(tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar").get().outputs.files)
+    buildArgs(
+        mapOf(
+            "JAR_FILE" to tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar").get().outputs.files.singleFile.name
+        )
+    )
+}
