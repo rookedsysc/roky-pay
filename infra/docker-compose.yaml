@@ -8,6 +8,22 @@ services:
       MYSQL_DATABASE: roky_pay
     ports:
       - "3306:3306"
+
+  membership-service:
+    image: roky-pay-membership-service:0.0.1-SNAPSHOT
+    container_name: membership-service
+    networks:
+      - roky-pay
+    ports:
+      - "8080:8080"
+    environment:
+#      - SPRING_PROFILES_ACTIVE=prod
+      - DB_IP=db
+    volumes:
+      - ../membership-service/build/libs:/app/libs
+    depends_on:
+      - db
+
 networks:
   roky-pay:
     driver: bridge
