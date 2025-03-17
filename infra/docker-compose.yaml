@@ -28,6 +28,21 @@ services:
     depends_on:
       - db
 
+  banking-service:
+    image: roky-pay-banking-service:0.0.1-SNAPSHOT
+    container_name: banking-service
+    networks:
+      - roky-pay
+    ports:
+      - "8081:8080"
+    environment:
+#      - SPRING_PROFILES_ACTIVE=prod
+      - DB_IP=db
+    volumes:
+      - ../banking-service/build/libs:/app/libs
+    depends_on:
+      - db
+
 networks:
   roky-pay:
     driver: bridge
