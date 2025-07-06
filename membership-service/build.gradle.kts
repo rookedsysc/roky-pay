@@ -1,28 +1,41 @@
+import org.springframework.boot.gradle.tasks.bundling.BootJar
+
 plugins {
+    kotlin("jvm")
+    kotlin("plugin.spring")
     id("com.palantir.docker") version "0.36.0"
+    id("org.springframework.boot")
+    id("io.spring.dependency-management")
+}
+
+tasks.named<BootJar>("bootJar") {
+    mainClass.set("org.roky.pay.membership.MembershipApplicationKt")
 }
 
 dependencies {
-    implementation("org.flywaydb:flyway-mysql:10.21.0")
-    implementation("org.flywaydb:flyway-core:10.21.0")
+    implementation(project(":common"))
+    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.flywaydb:flyway-mysql")
+    implementation("org.flywaydb:flyway-core")
 
-    testImplementation("io.mockk:mockk:1.13.11")
+    testImplementation("io.mockk:mockk")
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
 
-    testImplementation("com.h2database:h2:2.3.232")
+    testImplementation("com.h2database:h2")
 }
 
 tasks.register("prepareKotlinBuildScriptModel") {}
 
 docker {
-    println(tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar").get().outputs.files)
+    println(tasks.named<BootJar>("bootJar").get().outputs.files)
     name = "${rootProject.name}-${project.name}:${project.version}"
     setDockerfile(File("./Dockerfile"))
-    files(tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar").get().outputs.files)
+    files(tasks.named<BootJar>("bootJar").get().outputs.files)
     buildArgs(
         mapOf(
-            "JAR_FILE" to tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar").get().outputs.files.singleFile.name
+            "JAR_FILE" to tasks.named<BootJar>("bootJar").get().outputs.files.singleFile.name
         )
     )
 }
