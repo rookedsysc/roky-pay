@@ -8,12 +8,12 @@ plugins {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
+        languageVersion.set(JavaLanguageVersion.of(17))
     }
 }
 
 allprojects {
-    group = "org.rookedsysc"
+    group = "org.roky.pay"
     version = "0.0.1-SNAPSHOT"
 
     repositories {
@@ -59,20 +59,8 @@ subprojects {
     tasks.withType<Test> {
         useJUnitPlatform()
     }
+}
 
-    the<io.spring.gradle.dependencymanagement.dsl.DependencyManagementExtension>().apply {
-        imports {
-            mavenBom(org.springframework.boot.gradle.plugin.SpringBootPlugin.BOM_COORDINATES)
-        }
-    }
-
-    allOpen {
-        annotation("jakarta.persistence.Entity")
-        annotation("jakarta.persistence.MappedSuperclass")
-        annotation("jakarta.persistence.Embeddable")
-    }
-
-    tasks.withType<Test> {
-        useJUnitPlatform()
-    }
+tasks.named<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+    enabled = false
 }
