@@ -43,6 +43,21 @@ services:
     depends_on:
       - db
 
+  money-service:
+    image: roky-pay-money-service:0.0.1-SNAPSHOT
+    container_name: money-service
+    networks:
+      - roky-pay
+    ports:
+      - "8082:8082"
+    environment:
+#      - SPRING_PROFILES_ACTIVE=prod
+      - DB_IP=db
+    volumes:
+      - ../money-service/build/libs:/app/libs
+    depends_on:
+      - db
+
 networks:
   roky-pay:
     driver: bridge
